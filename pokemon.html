@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha Pokémon — Mundo Pokémon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-detail">
+  <div class="sky" aria-hidden="true">
+    <span class="cloud cloud-1">☁️</span>
+    <span class="cloud cloud-2">☁️</span>
+  </div>
+
+  <header class="header header-compact">
+    <a href="index.html" class="back-link">← Volver a la Pokédex</a>
+  </header>
+
+  <main class="container">
+    <div id="detail-loading" class="loading-box">
+      <div class="pokeball-loader"></div>
+      <p>Cargando ficha desde PokeAPI...</p>
+    </div>
+
+    <article id="detail-content" class="detail-content hidden">
+      <div class="detail-hero" id="detail-hero">
+        <div class="detail-image-wrap">
+          <img id="detail-image" src="" alt="">
+        </div>
+        <div class="detail-header-info">
+          <span id="detail-number" class="detail-number"></span>
+          <h1 id="detail-name"></h1>
+          <p id="detail-category" class="detail-category"></p>
+          <div id="detail-types" class="pokemon-types"></div>
+        </div>
+      </div>
+
+      <div class="detail-grid">
+        <section class="detail-card">
+          <h2>📜 ¿Sabías que...?</h2>
+          <p id="detail-description" class="detail-description"></p>
+        </section>
+
+        <section class="detail-card">
+          <h2>📏 Datos físicos</h2>
+          <ul class="detail-facts">
+            <li><strong>Altura:</strong> <span id="detail-height"></span> m</li>
+            <li><strong>Peso:</strong> <span id="detail-weight"></span> kg</li>
+            <li><strong>Habilidades:</strong> <span id="detail-abilities"></span></li>
+          </ul>
+        </section>
+
+        <section class="detail-card detail-card-wide">
+          <h2>💪 Estadísticas</h2>
+          <div id="detail-stats" class="stats-bars"></div>
+        </section>
+
+        <section class="detail-card detail-card-wide" id="evolution-section">
+          <h2>🔄 Evoluciones</h2>
+          <div id="detail-evolutions" class="evolution-chain"></div>
+        </section>
+      </div>
+
+      <div class="detail-actions">
+        <a href="index.html#juegos" class="btn-primary" id="play-link">🎮 Jugar con este Pokémon</a>
+        <button class="btn-secondary" id="random-pokemon" type="button">🎲 Otro Pokémon al azar</button>
+      </div>
+    </article>
+
+    <div id="detail-error" class="error-box hidden">
+      <p>😢 No se pudo cargar este Pokémon.</p>
+      <a href="index.html" class="btn-primary">Volver al inicio</a>
+    </div>
+  </main>
+
+  <div id="celebration" class="celebration hidden" aria-hidden="true"></div>
+
+  <footer class="footer">
+    <p>Datos por <a href="https://pokeapi.co/" target="_blank" rel="noopener">PokeAPI</a></p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/pokemon-detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Mundo Pokémon! — Aventura interactiva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="sky" aria-hidden="true">
+    <span class="cloud cloud-1">☁️</span>
+    <span class="cloud cloud-2">☁️</span>
+    <span class="cloud cloud-3">☁️</span>
+    <span class="star star-1">⭐</span>
+    <span class="star star-2">✨</span>
+  </div>
+
+  <header class="header">
+    <a href="index.html" class="logo-link">
+      <div class="pokeball-icon" aria-hidden="true"></div>
+      <h1>¡Mundo Pokémon!</h1>
+    </a>
+    <p class="subtitle">Pokédex real · Juegos · Medallas · ¡Diversión sin fin!</p>
+
+    <nav class="tabs" aria-label="Secciones">
+      <button class="tab active" data-section="inicio" type="button">🏠 Inicio</button>
+      <button class="tab" data-section="pokedex" type="button">📖 Pokédex</button>
+      <button class="tab" data-section="juegos" type="button">🎮 Juegos</button>
+      <button class="tab" data-section="medallas" type="button">🏆 Medallas</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- INICIO -->
+    <section id="inicio-section" class="section active">
+      <div class="hero-panel">
+        <div class="hero-text">
+          <h2>¡Bienvenido, Entrenador!</h2>
+          <p>Explora la <strong>Pokédex oficial</strong> con datos reales de PokeAPI, descubre secretos de cada Pokémon
+            y pon a prueba tus habilidades en <strong>4 minijuegos</strong>.</p>
+          <div class="hero-actions">
+            <button class="btn-primary" data-go="pokedex" type="button">Explorar Pokédex</button>
+            <button class="btn-secondary" data-go="juegos" type="button">Ir a Juegos</button>
+          </div>
+        </div>
+        <div id="pokemon-dia" class="pokemon-dia">
+          <p class="dia-label">⭐ Pokémon del día</p>
+          <div class="dia-loading">Cargando...</div>
+        </div>
+      </div>
+
+      <div class="actividades-grid">
+        <article class="act-card" data-go="pokedex">
+          <span class="act-icon">📖</span>
+          <h3>Pokédex Gen 1</h3>
+          <p>151 Pokémon con fotos, tipos y fichas completas.</p>
+        </article>
+        <article class="act-card" data-go="juegos">
+          <span class="act-icon">🎮</span>
+          <h3>Parque de Juegos</h3>
+          <p>4 retos distintos para jugar una y otra vez.</p>
+        </article>
+        <article class="act-card" data-go="medallas">
+          <span class="act-icon">🏆</span>
+          <h3>Colección de Medallas</h3>
+          <p>Desbloquea premios mientras exploras y juegas.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- POKÉDEX -->
+    <section id="pokedex-section" class="section">
+      <div class="panel">
+        <h2 class="section-title">📖 Pokédex — Generación 1</h2>
+        <p class="section-desc">Datos en tiempo real desde <a href="https://pokeapi.co/" target="_blank"
+            rel="noopener">PokeAPI</a></p>
+
+        <div class="filtros">
+          <input id="buscar" class="input-buscar" type="search" placeholder="🔍 Buscar Pokémon..."
+            aria-label="Buscar Pokémon">
+          <select id="filtro-tipo" class="select-tipo" aria-label="Filtrar por tipo">
+            <option value="">Todos los tipos</option>
+          </select>
+        </div>
+
+        <div id="pokedex-loading" class="loading-box">
+          <div class="pokeball-loader"></div>
+          <p>Conectando con la Pokédex...</p>
+        </div>
+
+        <div id="pokemon-list" class="pokemon-grid hidden" aria-label="Lista de Pokémon"></div>
+
+        <div id="pokedex-pagination" class="pagination hidden"></div>
+      </div>
+    </section>
+
+    <!-- JUEGOS -->
+    <section id="juegos-section" class="section">
+      <h2 class="section-title">🎮 Parque de Juegos</h2>
+      <p class="section-desc">Elige un juego. ¡Todos usan Pokémon reales!</p>
+
+      <div class="game-selector">
+        <button class="game-card-btn active" data-game="quiz" type="button">
+          <span>🔍</span><strong>¿Quién es ese Pokémon?</strong><small>Silueta + cronómetro</small>
+        </button>
+        <button class="game-card-btn" data-game="memory" type="button">
+          <span>🃏</span><strong>Memoria Pokémon</strong><small>Encuentra las parejas</small>
+        </button>
+        <button class="game-card-btn" data-game="catch" type="button">
+          <span>🎯</span><strong>¡Atrápalos!</strong><small>Haz clic antes de que huyan</small>
+        </button>
+        <button class="game-card-btn" data-game="types" type="button">
+          <span>⚔️</span><strong>Batalla de Tipos</strong><small>¿Qué tipo gana?</small>
+        </button>
+      </div>
+
+      <!-- Juego 1: Quiz -->
+      <div id="game-quiz" class="game-panel">
+        <div class="score-board">
+          <div class="score-item"><span class="score-label">Puntos</span><span id="quiz-score"
+              class="score-value">0</span></div>
+          <div class="score-item"><span class="score-label">Racha</span><span id="quiz-streak"
+              class="score-value">0</span></div>
+          <div class="score-item"><span class="score-label">Tiempo</span><span id="quiz-timer"
+              class="score-value">15</span></div>
+        </div>
+        <p class="game-question">¡Mira la silueta y adivina el Pokémon!</p>
+        <div class="pokemon-showcase">
+          <div class="showcase-ring"></div>
+          <img id="quiz-image" class="game-image silhouette" src="" alt="Silueta misteriosa">
+        </div>
+        <div id="quiz-options" class="options-grid"></div>
+        <p id="quiz-feedback" class="game-feedback" aria-live="polite"></p>
+      </div>
+
+      <!-- Juego 2: Memoria -->
+      <div id="game-memory" class="game-panel hidden">
+        <div class="score-board">
+          <div class="score-item"><span class="score-label">Movimientos</span><span id="mem-moves"
+              class="score-value">0</span></div>
+          <div class="score-item"><span class="score-label">Parejas</span><span id="mem-pairs"
+              class="score-value">0/8</span></div>
+          <div class="score-item"><span class="score-label">Mejor</span><span id="mem-best" class="score-value">—</span>
+          </div>
+        </div>
+        <button id="mem-restart" class="btn-primary btn-small" type="button">🔄 Nuevo tablero</button>
+        <div id="memory-board" class="memory-board"></div>
+        <p id="mem-feedback" class="game-feedback" aria-live="polite"></p>
+      </div>
+
+      <!-- Juego 3: Catch -->
+      <div id="game-catch" class="game-panel hidden">
+        <div class="score-board">
+          <div class="score-item"><span class="score-label">Atrapados</span><span id="catch-score"
+              class="score-value">0</span></div>
+          <div class="score-item"><span class="score-label">Vidas</span><span id="catch-lives"
+              class="score-value">❤️❤️❤️</span></div>
+          <div class="score-item"><span class="score-label">Tiempo</span><span id="catch-timer"
+              class="score-value">45</span></div>
+        </div>
+        <button id="catch-start" class="btn-primary btn-small" type="button">▶️ ¡Empezar!</button>
+        <div id="catch-arena" class="catch-arena">
+          <p class="catch-hint">Pulsa Empezar y haz clic en los Pokémon que aparezcan</p>
+        </div>
+        <p id="catch-feedback" class="game-feedback" aria-live="polite"></p>
+      </div>
+
+      <!-- Juego 4: Types -->
+      <div id="game-types" class="game-panel hidden">
+        <div class="score-board">
+          <div class="score-item"><span class="score-label">Aciertos</span><span id="types-score"
+              class="score-value">0</span></div>
+          <div class="score-item"><span class="score-label">Ronda</span><span id="types-round"
+              class="score-value">1</span></div>
+        </div>
+        <p id="types-question" class="game-question"></p>
+        <div id="types-options" class="options-grid"></div>
+        <p id="types-feedback" class="game-feedback" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- MEDALLAS -->
+    <section id="medallas-section" class="section">
+      <h2 class="section-title">🏆 Tus Medallas</h2>
+      <p class="section-desc">Juega y explora para desbloquearlas todas</p>
+      <div id="medallas-grid" class="medallas-grid"></div>
+    </section>
+  </main>
+
+  <div id="celebration" class="celebration hidden" aria-hidden="true"></div>
+
+  <footer class="footer">
+    <p>Datos por <a href="https://pokeapi.co/" target="_blank" rel="noopener">PokeAPI</a> · Proyecto educativo · ¡Gotta
+      catch 'em all!</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/pokedex.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/games.js"></script>
+</body>
+
+</html>
