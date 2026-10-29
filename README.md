@@ -67,7 +67,6 @@ POKEMON/
 │       ├── games.png
 │       └── medals.png
 │
-├── css/
 ├── js/
 ├── index.html
 ├── pokemon.html
@@ -81,7 +80,7 @@ POKEMON/
 1. Clona este repositorio:
 
 ```bash
-git clone https://github.com/TU-USUARIO/TU-REPOSITORIO.git
+git clone https://github.com/Ercv-gh/Pokemon.git
 ```
 
 2. Accede a la carpeta del proyecto.
